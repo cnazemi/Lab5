@@ -70,13 +70,61 @@ form[4].addEventListener('click', event => {
   form[6].disabled = true
   
 });
+
+
 // Q5
+var synth = window.speechSynthesis;
+
+var inputForm = document.querySelector('form');
+var inputTxt = document.querySelector('.txt');
+var voiceSelect = document.querySelector('select');
+
+var pitch = document.querySelector('#pitch');
+var pitchValue = document.querySelector('.pitch-value');
+var rate = document.querySelector('#rate');
+var rateValue = document.querySelector('.rate-value');
+
+var voices = [];
+
+function populateVoiceList() {
+  voices = synth.getVoices();
+  form[6].removeChild(form[6].childNodes[0])
+
+  for(var i = 0; i < voices.length ; i++) {
+    var option = document.createElement('option');
+    option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+
+    if(voices[i].default) {
+      option.textContent += ' -- DEFAULT';
+    }
+
+    option.setAttribute('data-lang', voices[i].lang);
+    option.setAttribute('data-name', voices[i].name);
+    form[6].appendChild(option);
+  }
+}
+
+populateVoiceList();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = populateVoiceList;
+}
+
 form[5].addEventListener('click', event => {
+  event.preventDefault();
   const topText = document.getElementById("text-top");
   const bottomText = document.getElementById("text-bottom");
-
-  let utterance = new SpeechSynthesisUtterance(topText.value + bottomText.value);
-  speechSynthesis.speak(utterance);
+  
+  var utterThis = new SpeechSynthesisUtterance(topText.value + bottomText.value);
+  
+  var selectedOption = form[6].selectedOptions[0].getAttribute('data-name');
+  for(var i = 0; i < voices.length ; i++) {
+    if(voices[i].name === selectedOption) {
+      utterThis.voice = voices[i];
+    }
+  }
+  utterThis.pitch = 1;
+  utterThis.rate = 0.7;
+  synth.speak(utterThis);
   
   
 });
