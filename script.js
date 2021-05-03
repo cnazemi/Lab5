@@ -114,20 +114,49 @@ form[5].addEventListener('click', event => {
   const topText = document.getElementById("text-top");
   const bottomText = document.getElementById("text-bottom");
   
-  var utterThis = new SpeechSynthesisUtterance(topText.value + bottomText.value);
-  
-  var selectedOption = form[6].selectedOptions[0].getAttribute('data-name');
-  for(var i = 0; i < voices.length ; i++) {
-    if(voices[i].name === selectedOption) {
-      utterThis.voice = voices[i];
+  if ((topText.value + bottomText.value) != "") {
+    var utterThis = new SpeechSynthesisUtterance(topText.value + bottomText.value);
+    
+    var selectedOption = form[6].selectedOptions[0].getAttribute('data-name');
+    for(var i = 0; i < voices.length ; i++) {
+      if(voices[i].name === selectedOption) {
+        utterThis.voice = voices[i];
+      }
     }
+    utterThis.pitch = 1;
+    utterThis.rate = 0.7;
+    utterThis.volume = (form[7].value / 100);
+    synth.speak(utterThis);
   }
-  utterThis.pitch = 1;
-  utterThis.rate = 0.7;
-  synth.speak(utterThis);
   
   
 });
+
+
+// Q6
+
+// const input = document.querySelector('input');
+// const log = document.getElementById('values');
+
+form[7].addEventListener('input', updateValue);
+
+function updateValue(e) {
+  //log.textContent = e.target.value;
+  //synth.volume = (form[7].value / 100);
+  if ((form[7].value >= 67) && (form[7].value <= 100)) {
+    
+  } else if ((form[7].value >= 34) && (form[7].value <= 66)) {
+    
+  } else if ((form[7].value >= 1) && (form[7].value <= 33)) {
+
+  } else {
+
+  }
+}
+
+
+
+
 
 /**
  * Takes in the dimensions of the canvas and the new image, then calculates the new
