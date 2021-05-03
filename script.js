@@ -2,12 +2,14 @@
 
 const img = new Image(); // used to load image from <input> and draw to canvas
 
+const canvas = document.getElementById("user-image");
+const ctx = canvas.getContext('2d');
+
 // Fires whenever the img object loads a new image (such as with img.src =)
 img.addEventListener('load', () => {
   // TODO
   
-  const canvas = document.getElementById("user-image");
-  const ctx = canvas.getContext('2d');
+  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -29,6 +31,29 @@ input.addEventListener('change', (event) => {
   img.alt = event.target.files[0].name
   
 });
+
+
+function logSubmit(event) {
+  const topText = document.getElementById("text-top");
+  const bottomText = document.getElementById("text-bottom");
+ 
+  ctx.font = "40px Comic Sans MS";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.fillText(topText.value.toUpperCase(), canvas.width/2, 55);
+
+  ctx.fillText(bottomText.value.toUpperCase(), canvas.width/2, canvas.height - 20);
+
+
+  form[3].disabled = true
+  form[4].disabled = false
+  form[5].disabled = false
+
+
+  event.preventDefault();
+}
+const form = document.getElementById('generate-meme');
+form.addEventListener('submit', logSubmit);
 
 
 
