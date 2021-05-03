@@ -5,6 +5,8 @@ const img = new Image(); // used to load image from <input> and draw to canvas
 const canvas = document.getElementById("user-image");
 const ctx = canvas.getContext('2d');
 
+
+// Q1
 // Fires whenever the img object loads a new image (such as with img.src =)
 img.addEventListener('load', () => {
   // TODO
@@ -23,7 +25,7 @@ img.addEventListener('load', () => {
   // - If you draw the image to canvas here, it will update as soon as a new image is selected
 });
 
-
+// Q2
 const input = document.getElementById('image-input');
 
 input.addEventListener('change', (event) => {
@@ -32,7 +34,7 @@ input.addEventListener('change', (event) => {
   
 });
 
-
+// Q3
 function logSubmit(event) {
   const topText = document.getElementById("text-top");
   const bottomText = document.getElementById("text-bottom");
@@ -42,20 +44,42 @@ function logSubmit(event) {
   ctx.textAlign = "center";
   ctx.fillText(topText.value.toUpperCase(), canvas.width/2, 55);
 
-  ctx.fillText(bottomText.value.toUpperCase(), canvas.width/2, canvas.height - 20);
+  ctx.fillText(bottomText.value.toUpperCase(), canvas.width/2, canvas.height - 25);
 
 
   form[3].disabled = true
   form[4].disabled = false
   form[5].disabled = false
-
+  form[6].disabled = false
 
   event.preventDefault();
 }
 const form = document.getElementById('generate-meme');
 form.addEventListener('submit', logSubmit);
 
+// Q4
+//const button = document.querySelector('button');
 
+form[4].addEventListener('click', event => {
+  //alert("HI")
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  form[3].disabled = false
+  form[4].disabled = true
+  form[5].disabled = true
+  form[6].disabled = true
+  
+});
+// Q5
+form[5].addEventListener('click', event => {
+  const topText = document.getElementById("text-top");
+  const bottomText = document.getElementById("text-bottom");
+
+  let utterance = new SpeechSynthesisUtterance(topText.value + bottomText.value);
+  speechSynthesis.speak(utterance);
+  
+  
+});
 
 /**
  * Takes in the dimensions of the canvas and the new image, then calculates the new
