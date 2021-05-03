@@ -26,7 +26,8 @@ const input = document.getElementById('image-input');
 
 input.addEventListener('change', (event) => {
   img.src = URL.createObjectURL(event.target.files[0]);
-  img.setAttribute
+  img.alt = event.target.files[0].name
+  
 });
 
 
