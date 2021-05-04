@@ -9,4 +9,4 @@
 
 ## Part 2:
 
-LINK TO YOUR PART 2 REPOSITORY
+[https://github.com/cnazemi/github-actions-for-ci](https://github.com/cnazemi/github-actions-for-ci)
