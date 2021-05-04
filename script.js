@@ -39,12 +39,14 @@ function logSubmit(event) {
   const topText = document.getElementById("text-top");
   const bottomText = document.getElementById("text-bottom");
  
-  ctx.font = "40px Comic Sans MS";
+  ctx.font = "50px sans-serif";
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
   ctx.fillText(topText.value.toUpperCase(), canvas.width/2, 55);
-
-  ctx.fillText(bottomText.value.toUpperCase(), canvas.width/2, canvas.height - 25);
+  ctx.fillText(bottomText.value.toUpperCase(), canvas.width/2, canvas.height - 15);
+  ctx.strokeText(topText.value.toUpperCase(), canvas.width/2, 55);
+  ctx.strokeText(bottomText.value.toUpperCase(), canvas.width/2, canvas.height - 15);
+  
 
 
   form[3].disabled = true
@@ -135,27 +137,22 @@ form[5].addEventListener('click', event => {
 
 // Q6
 
-// const input = document.querySelector('input');
-// const log = document.getElementById('values');
 
 form[7].addEventListener('input', updateValue);
 
 function updateValue(e) {
-  //log.textContent = e.target.value;
-  //synth.volume = (form[7].value / 100);
+  var volumeGroup = document.getElementById('volume-group');
+  var myimg = volumeGroup.getElementsByTagName('img')[0];
   if ((form[7].value >= 67) && (form[7].value <= 100)) {
-    
+    myimg.src = "icons/volume-level-3.svg"
   } else if ((form[7].value >= 34) && (form[7].value <= 66)) {
-    
+    myimg.src = "icons/volume-level-2.svg"
   } else if ((form[7].value >= 1) && (form[7].value <= 33)) {
-
+    myimg.src = "icons/volume-level-1.svg"
   } else {
-
+    myimg.src = "icons/volume-level-0.svg"
   }
 }
-
-
-
 
 
 /**
